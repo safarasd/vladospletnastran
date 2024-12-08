@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradbene storitve</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#home">Domov</a></li>
+            <li><a href="#about">O nas</a></li>
+            <li><a href="#services">Storitve</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+            <li><a href="#jobs">Zaposlitev</a></li>
+        </ul>
+    </nav>
+
+    <div id="home" class="hero">
+        <div class="hero-content">
+            <h1>Gradbene storitve</h1>
+            <p>Od streh do talnega ogrevanja, običajnega ogrevanja in vodovodnih instalacij - opravimo vse!</p>
+        </div>
+    </div>
+
+    <section id="about" class="section-light">
+        <div class="container">
+            <h2>O nas</h2>
+            <p>Smo profesionalno gradbeno podjetje z dolgoletnimi izkušnjami v gradbeništvu. Naša strast je zagotavljanje visokokakovostnih storitev za vse vaše gradbene potrebe. Z našim strokovnim znanjem in predanostjo kakovosti smo postali zaupanja vreden partner pri gradnji in obnovi domov ter poslovnih prostorov. Naš tim izkušenih strokovnjakov je predan doseganju odličnosti v vseh vidikih našega dela.</p>
+        </div>
+    </section>
+
+    <section id="services" class="section-dark">
+        <div class="container">
+            <h2>Naše storitve</h2>
+            <div class="services-grid">
+                <div class="service-card" onclick="openModal('streheModal')">
+                    <img src="roofing.JPG" alt="Strehe">
+                    <div class="service-card-content">
+                        <h3>Strehe</h3>
+                        <p>Vrhunske strešne storitve za vse vrste objektov.</p>
+                    </div>
+                </div>
+                <div class="service-card" onclick="openModal('ogrevanjeModal')">
+                    <img src="floorheatin2g.JPG" alt="Ogrevanje">
+                    <div class="service-card-content">
+                        <h3>Ogrevanje</h3>
+                        <p>Učinkoviti ogrevalni sistemi za vaš dom.</p>
+                    </div>
+                </div>
+                <div class="service-card" onclick="openModal('vodovodModal')">
+                    <img src="plum1.JPG" alt="Vodovod">
+                    <div class="service-card-content">
+                        <h3>Vodovod</h3>
+                        <p>Zanesljive vodovodne instalacije in popravila.</p>
+                    </div>
+                </div>
+                <div class="service-card" onclick="openModal('talnoOgrevanjeModal')">
+                    <img src="tile.JGP.webp" alt="Talno ogrevanje">
+                    <div class="service-card-content">
+                        <h3>Talno ogrevanje</h3>
+                        <p>Udobno in energetsko učinkovito talno ogrevanje.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-light">
+        <div class="container" id="contact-container">
+            <h2>Kontakt</h2>
+            <form id="contactForm">
+                <input type="text" name="name" placeholder="Ime in priimek" required>
+                <input type="email" name="email" placeholder="E-pošta" required>
+                <input type="tel" name="phone" placeholder="Telefonska številka">
+                <select name="service" required>
+                    <option value="">Izberite storitev</option>
+                    <option value="roofing">Strehe</option>
+                    <option value="heating">Ogrevanje</option>
+                    <option value="plumbing">Vodovod</option>
+                    <option value="floorheating">Talno ogrevanje</option>
+                    <option value="other">Drugo</option>
+                </select>
+                <input type="text" name="location" placeholder="Lokacija (mesto)" required>
+                <textarea name="message" placeholder="Vaše sporočilo" required></textarea>
+                <button type="submit">Pošlji</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="jobs" class="section-dark">
+        <div class="container">
+            <h2>Zaposlitev</h2>
+            <form id="jobForm">
+                <input type="text" name="name" placeholder="Ime in priimek" required>
+                <input type="email" name="email" placeholder="E-pošta" required>
+                <input type="tel" name="phone" placeholder="Telefonska številka" required>
+                <input type="text" name="location" placeholder="Kraj bivanja" required>
+                <select name="position" required>
+                    <option value="">Izberite delovno mesto</option>
+                    <option value="roofer">Krovec</option>
+                    <option value="plumber">Vodovodar</option>
+                    <option value="hvac">HVAC tehnik</option>
+                    <option value="general">Splošni delavec</option>
+                </select>
+                <input type="number" name="experience" placeholder="Leta izkušenj" required>
+                <textarea name="skills" placeholder="Vaše veščine in kvalifikacije" required></textarea>
+                <button type="submit">Prijava na delo</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Modal windows for services -->
+    <div id="streheModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('streheModal')">&times;</span>
+            <h2>Strehe</h2>
+            <p>Naše strešne storitve vključujejo popravila, zamenjave in nove namestitve za vse vrste streh. Uporabljamo visokokakovostne materiale in najnovejše tehnike za zagotavljanje dolgotrajne in zanesljive zaščite vašega doma ali poslovnega objekta. Naši izkušeni krovci lahko delajo z različnimi materiali, vključno s skodlami, kovino, ploščatimi strehami in več.</p>
+        </div>
+    </div>
+
+    <div id="ogrevanjeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('ogrevanjeModal')">&times;</span>
+            <h2>Ogrevanje</h2>
+            <p>Naše ogrevalne storitve zajemajo načrtovanje, namestitev in vzdrževanje učinkovitih ogrevalnih sistemov. Ponujamo širok izbor rešitev, vključno s centralnim ogrevanjem, toplotnimi črpalkami in sodobnimi pečmi. Naš cilj je zagotoviti udobje vašega doma ali pisarne ob hkratnem zmanjšanju stroškov energije in vpliva na okolje.</p>
+        </div>
+    </div>
+
+    <div id="vodovodModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('vodovodModal')">&times;</span>
+            <h2>Vodovod</h2>
+            <p>Naše vodovodne storitve pokrivajo vse vidike vodovodnih instalacij, popravil in vzdrževanja. Od odpravljanja puščanj in zamašenih odtokov do namestitve novih pip in sanitarne opreme - naši izkušeni vodovodarji lahko rešijo vse vaše vodovodne težave. Zagotavljamo hitre in zanesljive storitve za gospodinjstva in poslovne prostore.</p>
+        </div>
+    </div>
+
+    <div id="talnoOgrevanjeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('talnoOgrevanjeModal')">&times;</span>
+            <h2>Talno ogrevanje</h2>
+            <p>Naše storitve talnega ogrevanja vključujejo načrtovanje, namestitev in vzdrževanje sistemov talnega ogrevanja za domove in poslovne prostore. Talno ogrevanje zagotavlja enakomerno in udobno toploto, hkrati pa je energetsko učinkovito. Ponujamo tako električne kot vodne sisteme talnega ogrevanja, prilagojene vašim specifičnim potrebam in proračunu.</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

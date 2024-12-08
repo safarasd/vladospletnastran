@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - View Messages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        select, button {
+            padding: 5px 10px;
+            margin-right: 10px;
+        }
+        .message {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .message.unread {
+            font-weight: bold;
+            border-left: 5px solid #007bff;
+        }
+        .message h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin - Messages</h1>
+        <div class="controls">
+            <select id="service-filter">
+                <option value="">All Services</option>
+                <option value="roofing">Roofing</option>
+                <option value="heating">Heating</option>
+                <option value="plumbing">Plumbing</option>
+                <option value="floorheating">Floor Heating</option>
+            </select>
+            <button id="sort-button">Toggle Sort (Newest/Oldest)</button>
+        </div>
+        <div id="messages-container"></div>
+    </div>
+    <script>
+        let messages = [];
+        let sortNewestFirst = true;
+
+        async function fetchMessages() {
+            try {
+                const response = await fetch('/api/messages');
+                if (response.ok) {
+                    messages = await response.json();
+                    displayMessages();
+                } else {
+                    console.error('Failed to fetch messages');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function displayMessages() {
+            const container = document.getElementById('messages-container');
+            const serviceFilter = document.getElementById('service-filter').value;
+            container.innerHTML = '';
+
+            let filteredMessages = messages;
+            if (serviceFilter) {
+                filteredMessages = messages.filter(m => m.service.toLowerCase() === serviceFilter);
+            }
+
+            if (sortNewestFirst) {
+                filteredMessages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            } else {
+                filteredMessages.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+            }
+
+            filteredMessages.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                if (!message.read) {
+                    messageElement.classList.add('unread');
+                }
+                messageElement.innerHTML = `
+                    <h3>${message.service}</h3>
+                    <p><strong>Name:</strong> ${message.name}</p>
+                    <p><strong>Email:</strong> ${message.email}</p>
+                    <p><strong>Phone:</strong> ${message.phone}</p>
+                    <p><strong>Location:</strong> ${message.location}</p>
+                    <p><strong>Message:</strong> ${message.message}</p>
+                    <p><strong>Date:</strong> ${new Date(message.createdAt).toLocaleString()}</p>
+                `;
+                messageElement.addEventListener('click', () => markAsRead(message, messageElement));
+                container.appendChild(messageElement);
+            });
+        }
+
+        function markAsRead(message, element) {
+            if (!message.read) {
+                message.read = true;
+                element.classList.remove('unread');
+                // Here you would typically send an API request to update the message status in the database
+                // For this example, we're just updating it client-side
+            }
+        }
+
+        document.getElementById('service-filter').addEventListener('change', displayMessages);
+
+        document.getElementById('sort-button').addEventListener('click', () => {
+            sortNewestFirst = !sortNewestFirst;
+            displayMessages();
+        });
+
+        fetchMessages();
+    </script>
+</body>
+</html>
